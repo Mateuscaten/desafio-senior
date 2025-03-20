@@ -10,7 +10,8 @@ create table cidade (
                          nome_alternativo varchar(200),
                          micro_regiao varchar(200) not null,
                          meso_regiao varchar(200) not null,
-                         constraint pk_cidade primary key(id)
+                         constraint pk_cidade primary key(id),
+                         constraint uk_cidade_ibge_id unique (ibge_id)
 );
 
     create index idx_cidade_ibge_id on cidade (ibge_id);

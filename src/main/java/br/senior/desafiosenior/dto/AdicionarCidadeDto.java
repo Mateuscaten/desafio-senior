@@ -1,8 +1,8 @@
 package br.senior.desafiosenior.dto;
 
-import br.senior.desafiosenior.dominio.entidade.Cidade;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,13 +12,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CidadeDto {
-
-    private Long id;
+public class AdicionarCidadeDto {
 
     @NotNull(message = "Ibge é obrigatório.")
     private Long ibgeId;
 
+    @Size(message = "Uf não pode ter mais de 2 caracteres", max = 2)
     @NotEmpty(message = "UF é obrigatória.")
     private String uf;
 
@@ -34,8 +33,6 @@ public class CidadeDto {
     @NotNull(message = "Latitude é obrigatória.")
     private Double latitude;
 
-    private String nomeCidadeSemAcento;
-
     private String nomeAlternativo;
 
     @NotEmpty(message = "Micro Região é obrigatória.")
@@ -43,28 +40,4 @@ public class CidadeDto {
 
     @NotEmpty(message = "Meso Região é obrigatória.")
     private String mesoRegiao;
-
-
-    public static CidadeDto converterEntidade(Cidade cidade) {
-        if (cidade == null) {
-            return null;
-        }
-
-        return CidadeDto
-                .builder()
-                .id(cidade.getId())
-                .ibgeId(cidade.getIbgeId())
-                .nomeCidade(cidade.getNomeCidade())
-                .uf(cidade.getUf())
-                .capital(cidade.getCapital())
-                .microRegiao(cidade.getMicroRegiao())
-                .mesoRegiao(cidade.getMesoRegiao())
-                .nomeAlternativo(cidade.getNomeAlternativo())
-                .nomeCidadeSemAcento(cidade.getNomeCidadeSemAcento())
-                .latitude(cidade.getLatitude())
-                .longitude(cidade.getLongitude())
-                .build();
-
-    }
-
 }
